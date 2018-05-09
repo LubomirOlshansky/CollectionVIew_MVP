@@ -23,13 +23,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         for _ in 0...9 {
             self.Elements.append(Element())
         }
-        
     }
     
-    
-    func random(_ range:Range<Int>) -> Int
-    {
-        return range.lowerBound + Int(arc4random_uniform(UInt32(range.upperBound - range.lowerBound)))
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -49,6 +46,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             cell.nubmerLabel.text = String(Elements[indexPath.row].number)
         }
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row > 0 {
+            Elements[indexPath.row - 1].number += Elements[indexPath.row].number
+        } else {
+            Elements[Elements.count - 1].number += Elements[indexPath.row].number
+        }
+        
+        collectionView.reloadData()
     }
    
 }
