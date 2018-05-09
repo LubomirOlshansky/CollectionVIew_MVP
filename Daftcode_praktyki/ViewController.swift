@@ -21,7 +21,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func initializeArray() {
         for _ in 0...9 {
-            self.Elements.append(Element(number: Int(arc4random_uniform(10)), color: .Red))
+            self.Elements.append(Element())
         }
         
     }
@@ -41,10 +41,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         switch Elements[indexPath.row].color {
         
-        case .Red:
+        case .red:
             cell.circleView.backgroundColor = UIColor.red
             cell.nubmerLabel.text = String((Elements[indexPath.row].number) * 3)
-        case .Blue:
+        case .blue:
             cell.circleView.backgroundColor = UIColor.blue
             cell.nubmerLabel.text = String(Elements[indexPath.row].number)
         }
@@ -58,26 +58,21 @@ struct Element {
     var number: Int
     var color: Color
     
-//    init() {
-//        self.number = random(0..<11)
-//        self.color = .Blue
-//    }
-    
-    
-    
+    init() {
+        self.number = Int(arc4random_uniform(10))
+        self.color = Color.randomColor()
+    }
 }
+
 enum Color {
-    case Red
-    case Blue
+    case red
+    case blue
     
-    
+    static func randomColor() -> Color {
+        let colorsToGetRandomly = [Color.red, Color.blue]
+        let index = Int(arc4random_uniform(UInt32(colorsToGetRandomly.count)))
+        let color = colorsToGetRandomly[index]
+        return color
+    }
 }
-
-
-//extension Elements {
-//    func random(_ range:Range<Int>) -> Int
-//    {
-//        return range.lowerBound + Int(arc4random_uniform(UInt32(range.upperBound - range.lowerBound)))
-//    }
-//}
 
