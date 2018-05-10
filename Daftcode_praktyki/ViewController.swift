@@ -15,8 +15,45 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.allowsSelection = false
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(didSingleTap))
+        singleTap.numberOfTapsRequired = 1
+        singleTap.delegate = self
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(didDoubleTap))
+        doubleTap.numberOfTapsRequired = 2
+        doubleTap.delegate = self
+        self.collectionView.addGestureRecognizer(singleTap)
+        self.collectionView.addGestureRecognizer(doubleTap)
+        
         initializeArray()
 
+    }
+    
+    @objc func didSingleTap(gesture: UITapGestureRecognizer) {
+        let pointInCollectionView: CGPoint = gesture.location(in: self.collectionView)
+        if let tapIndexPath = self.collectionView.indexPathForItem(at: pointInCollectionView) {
+            if (self.collectionView.cellForItem(at: tapIndexPath) as? CollectionViewCell) != nil {
+                if tapIndexPath.row > 0 {
+                    Elements[tapIndexPath.row].number += Elements[tapIndexPath.row - 1].number
+                } else {
+                    Elements[tapIndexPath.row].number += Elements[Elements.count - 1].number
+                }
+                print("singleTap")
+                collectionView.reloadData()
+
+            }
+        }
+    }
+    
+    @objc func didDoubleTap(gesture: UITapGestureRecognizer) {
+        let pointInCollectionView: CGPoint = gesture.location(in: self.collectionView)
+        if let tapIndexPath = self.collectionView.indexPathForItem(at: pointInCollectionView) {
+            if (self.collectionView.cellForItem(at: tapIndexPath) as? CollectionViewCell) != nil {
+                Elements[tapIndexPath.row].number = 0
+                print("doubleTap")
+                collectionView.reloadData()
+            }
+        }
     }
     
     func initializeArray() {
@@ -47,16 +84,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
         return cell
     }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row > 0 {
-            Elements[indexPath.row - 1].number += Elements[indexPath.row].number
-        } else {
-            Elements[Elements.count - 1].number += Elements[indexPath.row].number
-        }
-        
-        collectionView.reloadData()
+}
+
+extension ViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
-   
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return (otherGestureRecognizer as? UITapGestureRecognizer)?.numberOfTapsRequired == 2
+    }
 }
 
 
