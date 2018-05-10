@@ -8,14 +8,26 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    @IBOutlet weak var collectionView: UICollectionView!
+//    let cell = "cellID"
+    var collectionView: UICollectionView!
     var Elements = [Element]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.allowsSelection = false
+        
+        setupCollectionView()
+        collectionView.backgroundColor = UIColor.white
+        initializeArray()
+
+    }
+    
+    func setupCollectionView() {
+        collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        collectionView.delegate   = self
+        collectionView.dataSource = self
+        collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(didSingleTap))
         singleTap.numberOfTapsRequired = 1
         singleTap.delegate = self
@@ -24,15 +36,37 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         doubleTap.delegate = self
         self.collectionView.addGestureRecognizer(singleTap)
         self.collectionView.addGestureRecognizer(doubleTap)
-        
-        initializeArray()
-
+        self.view.addSubview(collectionView)
+    }
+    let layout: UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        let insetLeft: CGFloat = 5.0
+        let insetRight: CGFloat = 5.0
+        layout.sectionInset = UIEdgeInsets(top: 10,
+                                           left: insetLeft,
+                                           bottom: 5.0,
+                                           right: insetRight)
+        let itemSide = UIScreen.main.bounds.width / 3 - (insetLeft + insetRight)
+        layout.itemSize = CGSize(width: itemSide, height: itemSide)
+        return layout
+    }()
+    
+    
+    
+    
+    
+    
+    func initializeArray() {
+        for _ in 0...9 {
+            self.Elements.append(Element())
+        }
     }
     
     @objc func didSingleTap(gesture: UITapGestureRecognizer) {
         let pointInCollectionView: CGPoint = gesture.location(in: self.collectionView)
         if let tapIndexPath = self.collectionView.indexPathForItem(at: pointInCollectionView) {
             if (self.collectionView.cellForItem(at: tapIndexPath) as? CollectionViewCell) != nil {
+                
                 if tapIndexPath.row > 0 {
                     Elements[tapIndexPath.row].number += Elements[tapIndexPath.row - 1].number
                 } else {
@@ -53,12 +87,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 print("doubleTap")
                 collectionView.reloadData()
             }
-        }
-    }
-    
-    func initializeArray() {
-        for _ in 0...9 {
-            self.Elements.append(Element())
         }
     }
     
@@ -96,26 +124,4 @@ extension ViewController: UIGestureRecognizerDelegate {
     }
 }
 
-
-struct Element {
-    var number: Int
-    var color: Color
-    
-    init() {
-        self.number = Int(arc4random_uniform(10))
-        self.color = Color.randomColor()
-    }
-}
-
-enum Color {
-    case red
-    case blue
-    
-    static func randomColor() -> Color {
-        let colorsToGetRandomly = [Color.red, Color.blue]
-        let index = Int(arc4random_uniform(UInt32(colorsToGetRandomly.count)))
-        let color = colorsToGetRandomly[index]
-        return color
-    }
-}
 
