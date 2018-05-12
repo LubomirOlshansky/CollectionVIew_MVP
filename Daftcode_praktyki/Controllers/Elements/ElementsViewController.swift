@@ -14,7 +14,7 @@ class ElementsViewController: UIViewController, UICollectionViewDelegate, UIColl
     let presenter: ElementsCollectionPresenter!
     var collectionView: UICollectionView!
     
-    enum CountTap: Int { case single = 1, double }
+    enum TapCount: Int { case single = 1, double }
 
     init(with presenter: ElementsCollectionPresenter) {
         self.presenter = presenter
@@ -34,7 +34,7 @@ class ElementsViewController: UIViewController, UICollectionViewDelegate, UIColl
 
     }
     
-    private func getTap(with count: CountTap) -> UITapGestureRecognizer {
+    private func getTap(with count: TapCount) -> UITapGestureRecognizer {
         
         let selector = count == .single ? #selector(didSingleTap) : #selector(didDoubleTap)
         let singleTap = UITapGestureRecognizer(target: self, action: selector)
@@ -52,8 +52,8 @@ class ElementsViewController: UIViewController, UICollectionViewDelegate, UIColl
         collectionView.dataSource = presenter
         presenter.registerCells(for: collectionView)
         
-        collectionView.addGestureRecognizer(getTap(with: CountTap.single))
-        collectionView.addGestureRecognizer(getTap(with: CountTap.double))
+        collectionView.addGestureRecognizer(getTap(with: TapCount.single))
+        collectionView.addGestureRecognizer(getTap(with: TapCount.double))
         
         self.view.addSubview(collectionView)
         
@@ -73,35 +73,41 @@ class ElementsViewController: UIViewController, UICollectionViewDelegate, UIColl
         return layout
     }()
     
-    @objc func didSingleTap(gesture: UITapGestureRecognizer) {
-        let pointInCollectionView: CGPoint = gesture.location(in: self.collectionView)
-        if let tapIndexPath = self.collectionView.indexPathForItem(at: pointInCollectionView) {
-            if (self.collectionView.cellForItem(at: tapIndexPath) as? CollectionViewCell) != nil {
-                
-                self.presenter.subtractionOperation(indexPath: tapIndexPath.row) { [weak self] in
-                    DispatchQueue.main.async {
-                        self?.collectionView.reloadData()
-                }
-            }
-        }
-    }
-}
     
-    @objc func didDoubleTap(gesture: UITapGestureRecognizer) {
-        let pointInCollectionView: CGPoint = gesture.location(in: self.collectionView)
-        if let tapIndexPath = self.collectionView.indexPathForItem(at: pointInCollectionView) {
-            if (self.collectionView.cellForItem(at: tapIndexPath) as? CollectionViewCell) != nil {
-                
-                self.presenter.isZeroOperation(indexPath: tapIndexPath.row) { [weak self] in
-                    DispatchQueue.main.async {
-                        self?.collectionView.reloadData()
+    private func didTap(with tap: TapCount, gesture: UITapGestureRecognizer) {
+        
+        let pointInCollectionView: CGPoint = gesture.location(in: collectionView)
+        
+        if let tapIndexPath = collectionView.indexPathForItem(at: pointInCollectionView) {
+            
+            if (collectionView.cellForItem(at: tapIndexPath) as? CollectionViewCell) != nil {
+                switch tap {
+                case .single:
+                    self.presenter.subtractionOperation(indexPath: tapIndexPath.row) { [weak self] in
+                        DispatchQueue.main.async {
+                            self?.collectionView.reloadData()
+                        }
+                    }
+                case .double:
+                    self.presenter.subtractionOperation(indexPath: tapIndexPath.row) { [weak self] in
+                        DispatchQueue.main.async {
+                            self?.collectionView.reloadData()
+                        }
                     }
                 }
             }
         }
     }
+    
+    @objc func didSingleTap(gesture: UITapGestureRecognizer) {
+        didTap(with: TapCount.single, gesture: gesture)
+    }
+    
+    @objc func didDoubleTap(gesture: UITapGestureRecognizer) {
+        didTap(with: TapCount.double, gesture: gesture)
+    }
 }
-
+    
 extension ElementsViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true

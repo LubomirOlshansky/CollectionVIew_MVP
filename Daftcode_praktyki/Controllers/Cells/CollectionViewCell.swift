@@ -27,19 +27,26 @@ class CollectionViewCell: UICollectionViewCell {
         commonInit()
     }
     
+
     func commonInit() {
-        circleView = UIView(frame: contentView.frame)
-        let side = circleView.frame.width
-        circleView.layer.cornerRadius = side * 0.5
-        circleView.clipsToBounds = true
-        contentView.addSubview(circleView)
         
+        circleView = UIView(frame: contentView.frame)
         numberLabel = UILabel(frame: contentView.frame)
-        numberLabel.textAlignment = .center
-        numberLabel.font = UIFont.systemFont(ofSize: 30, weight: .medium)
+
+        circleView.layer.cornerRadius = circleView.frame.width * 0.5
+        
+        contentView.addSubview(circleView)
         contentView.addSubview(numberLabel)
         
         numberLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        numberLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        numberLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        
+        numberLabel.textAlignment = .center
+        numberLabel.font = UIFont.systemFont(ofSize: 30, weight: .medium)
+        
+        
     }
     
     func changeColorAndText(with element: Element) {
@@ -49,11 +56,11 @@ class CollectionViewCell: UICollectionViewCell {
         case .red:
             circleView.backgroundColor = .red
             numberLabel.text = String(element.number * 3)
-//            numberLabel.sizeToFit()
+            numberLabel.sizeToFit()
         case .blue:
             circleView.backgroundColor = .blue
             numberLabel.text = String(element.number)
-//            numberLabel.sizeToFit()
+            numberLabel.sizeToFit()
         }
     }
 }

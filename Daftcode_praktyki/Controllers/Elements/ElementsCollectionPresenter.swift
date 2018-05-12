@@ -46,7 +46,7 @@ class ElementsCollectionPresenter: NSObject {
 }
 
     //MARK: UICollectionView data source
-extension ElementsCollectionPresenter: UICollectionViewDataSource {
+    extension ElementsCollectionPresenter: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
