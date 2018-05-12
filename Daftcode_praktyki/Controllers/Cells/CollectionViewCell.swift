@@ -15,7 +15,7 @@ class CollectionViewCell: UICollectionViewCell {
     
     
     var circleView: UIView!
-    var nubmerLabel: UILabel!
+    var numberLabel: UILabel!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,12 +34,26 @@ class CollectionViewCell: UICollectionViewCell {
         circleView.clipsToBounds = true
         contentView.addSubview(circleView)
         
-        nubmerLabel = UILabel(frame: contentView.frame)
-        nubmerLabel.textAlignment = .center
-        nubmerLabel.font = UIFont.systemFont(ofSize: 30, weight: .medium)
-        contentView.addSubview(nubmerLabel)
+        numberLabel = UILabel(frame: contentView.frame)
+        numberLabel.textAlignment = .center
+        numberLabel.font = UIFont.systemFont(ofSize: 30, weight: .medium)
+        contentView.addSubview(numberLabel)
         
-//        self.contentView.backgroundColor = .white
+        numberLabel.translatesAutoresizingMaskIntoConstraints = false
     }
     
+    func changeColorAndText(with element: Element) {
+        
+        switch element.color {
+            
+        case .red:
+            circleView.backgroundColor = .red
+            numberLabel.text = String(element.number * 3)
+//            numberLabel.sizeToFit()
+        case .blue:
+            circleView.backgroundColor = .blue
+            numberLabel.text = String(element.number)
+//            numberLabel.sizeToFit()
+        }
+    }
 }
