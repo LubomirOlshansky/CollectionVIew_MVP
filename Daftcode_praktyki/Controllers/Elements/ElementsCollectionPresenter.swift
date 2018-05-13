@@ -25,18 +25,27 @@ class ElementsCollectionPresenter: NSObject {
     }
     
     func subtractionOperation(indexPath: Int, completion: @escaping makeOperationComplition) {
-        if indexPath > 0 {
-            elements[indexPath].number += elements[indexPath - 1].number
-        } else {
-            elements[indexPath].number += elements[elements.count - 1].number
+        
+        DispatchQueue.global().async {
+            
+            if indexPath > 0 {
+                self.elements[indexPath].number += self.elements[indexPath - 1].number
+            } else {
+                self.elements[indexPath].number += self.elements[self.elements.count - 1].number
+            }
+            DispatchQueue.main.async {
+                completion()
+            }
         }
-        completion()
     }
     
-    func isZeroOperation(indexPath: Int, completion: @escaping makeOperationComplition) {
-        elements[indexPath].number = 0
-        completion()
-        
+    func resetOperation(indexPath: Int, completion: @escaping makeOperationComplition) {
+        DispatchQueue.global().async {
+            self.elements[indexPath].number = 0
+            DispatchQueue.main.async {
+                completion()
+            }
+        }
     }
     
     func registerCells(for collectionView: UICollectionView) {

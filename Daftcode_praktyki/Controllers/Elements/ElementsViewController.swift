@@ -84,15 +84,12 @@ class ElementsViewController: UIViewController, UICollectionViewDelegate, UIColl
                 switch tap {
                 case .single:
                     self.presenter.subtractionOperation(indexPath: tapIndexPath.row) { [weak self] in
-                        DispatchQueue.main.async {
+                        
                             self?.collectionView.reloadData()
-                        }
                     }
                 case .double:
-                    self.presenter.subtractionOperation(indexPath: tapIndexPath.row) { [weak self] in
-                        DispatchQueue.main.async {
+                    self.presenter.resetOperation(indexPath: tapIndexPath.row) { [weak self] in
                             self?.collectionView.reloadData()
-                        }
                     }
                 }
             }
@@ -108,6 +105,7 @@ class ElementsViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
 }
     
+
 extension ElementsViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
