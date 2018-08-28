@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  Daftcode_praktyki
+//  CollectionVIew_MVP
 //
 //  Created by Lubomir Olshansky on 09/05/2018.
 //  Copyright © 2018 Lubomir Olshansky. All rights reserved.

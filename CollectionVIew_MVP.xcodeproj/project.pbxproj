@@ -20,7 +20,7 @@
 		8D1A77C320A36B7600CF9783 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		8D1A77C620A4BE6700CF9783 /* ElementsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsModel.swift; sourceTree = "<group>"; };
 		8D1A77C820A4BF9100CF9783 /* ElementsCollectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsCollectionPresenter.swift; sourceTree = "<group>"; };
-		8D64E81720A36298002B40FA /* Daftcode_praktyki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Daftcode_praktyki.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D64E81720A36298002B40FA /* CollectionVIew_MVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionVIew_MVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D64E81A20A36298002B40FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D64E81C20A36298002B40FA /* ElementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsViewController.swift; sourceTree = "<group>"; };
 		8D64E82120A36298002B40FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -51,7 +51,7 @@
 		8D64E80E20A36298002B40FA = {
 			isa = PBXGroup;
 			children = (
-				8D64E81920A36298002B40FA /* Daftcode_praktyki */,
+				8D64E81920A36298002B40FA /* CollectionVIew_MVP */,
 				8D64E81820A36298002B40FA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -59,12 +59,12 @@
 		8D64E81820A36298002B40FA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D64E81720A36298002B40FA /* Daftcode_praktyki.app */,
+				8D64E81720A36298002B40FA /* CollectionVIew_MVP.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8D64E81920A36298002B40FA /* Daftcode_praktyki */ = {
+		8D64E81920A36298002B40FA /* CollectionVIew_MVP */ = {
 			isa = PBXGroup;
 			children = (
 				8D64E81A20A36298002B40FA /* AppDelegate.swift */,
@@ -74,7 +74,7 @@
 				8D64E82620A36298002B40FA /* Info.plist */,
 				8D1A77C520A36D5300CF9783 /* Storyboards */,
 			);
-			path = Daftcode_praktyki;
+			path = CollectionVIew_MVP;
 			sourceTree = "<group>";
 		};
 		8DF636D520A7679E008562E6 /* Models */ = {
@@ -114,9 +114,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8D64E81620A36298002B40FA /* Daftcode_praktyki */ = {
+		8D64E81620A36298002B40FA /* CollectionVIew_MVP */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8D64E82920A36298002B40FA /* Build configuration list for PBXNativeTarget "Daftcode_praktyki" */;
+			buildConfigurationList = 8D64E82920A36298002B40FA /* Build configuration list for PBXNativeTarget "CollectionVIew_MVP" */;
 			buildPhases = (
 				8D64E81320A36298002B40FA /* Sources */,
 				8D64E81420A36298002B40FA /* Frameworks */,
@@ -126,9 +126,9 @@
 			);
 			dependencies = (
 			);
-			name = Daftcode_praktyki;
-			productName = Daftcode_praktyki;
-			productReference = 8D64E81720A36298002B40FA /* Daftcode_praktyki.app */;
+			name = CollectionVIew_MVP;
+			productName = CollectionVIew_MVP;
+			productReference = 8D64E81720A36298002B40FA /* CollectionVIew_MVP.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -147,7 +147,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8D64E81220A36298002B40FA /* Build configuration list for PBXProject "Daftcode_praktyki" */;
+			buildConfigurationList = 8D64E81220A36298002B40FA /* Build configuration list for PBXProject "CollectionVIew_MVP" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -160,7 +160,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8D64E81620A36298002B40FA /* Daftcode_praktyki */,
+				8D64E81620A36298002B40FA /* CollectionVIew_MVP */,
 			);
 		};
 /* End PBXProject section */
@@ -317,7 +317,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S6PVT5UP7G;
-				INFOPLIST_FILE = Daftcode_praktyki/Info.plist;
+				INFOPLIST_FILE = CollectionVIew_MVP/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "LO.Daftcode-praktyki";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -332,7 +332,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S6PVT5UP7G;
-				INFOPLIST_FILE = Daftcode_praktyki/Info.plist;
+				INFOPLIST_FILE = CollectionVIew_MVP/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "LO.Daftcode-praktyki";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -344,7 +344,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8D64E81220A36298002B40FA /* Build configuration list for PBXProject "Daftcode_praktyki" */ = {
+		8D64E81220A36298002B40FA /* Build configuration list for PBXProject "CollectionVIew_MVP" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8D64E82720A36298002B40FA /* Debug */,
@@ -353,7 +353,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8D64E82920A36298002B40FA /* Build configuration list for PBXNativeTarget "Daftcode_praktyki" */ = {
+		8D64E82920A36298002B40FA /* Build configuration list for PBXNativeTarget "CollectionVIew_MVP" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8D64E82A20A36298002B40FA /* Debug */,
